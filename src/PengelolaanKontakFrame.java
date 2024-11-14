@@ -1,3 +1,11 @@
+
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -12,8 +20,9 @@ public class PengelolaanKontakFrame extends javax.swing.JFrame {
     /**
      * Creates new form PengelolaanKontakFrame
      */
-    public PengelolaanKontakFrame() {
+    public PengelolaanKontakFrame() throws SQLException {
         initComponents();
+        refreshContactTable();
     }
 
     /**
@@ -25,21 +34,174 @@ public class PengelolaanKontakFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txtName = new javax.swing.JTextField();
+        txtPhone = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        comboCategory = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableContacts = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        txtSearch = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new java.awt.GridLayout());
+
+        jPanel1.setBackground(new java.awt.Color(255, 153, 0));
+
+        jLabel1.setText("Nama");
+
+        jLabel2.setText("Nomor");
+
+        jLabel3.setText("Cari Kontak");
+
+        comboCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Keluarga", "Teman", "Kerja" }));
+
+        tableContacts.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Id", "Name", "Phone"
+            }
+        ));
+        tableContacts.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tableContactsFocusGained(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tableContacts);
+
+        jButton1.setText("Tambah");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Edit");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Hapus");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Cari");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Kategori");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel1)
+                                .addComponent(jLabel4))
+                            .addGap(75, 75, 75)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(comboCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(txtPhone)
+                                .addComponent(txtName)))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel3)
+                            .addGap(61, 61, 61)
+                            .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButton4))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jButton1)
+                            .addGap(30, 30, 30)
+                            .addComponent(jButton2)
+                            .addGap(30, 30, 30)
+                            .addComponent(jButton3)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(232, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(comboCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton4)
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48))
         );
+
+        getContentPane().add(jPanel1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    addContact();
+   
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        searchContact();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+      editContact();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        deleteContact();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void tableContactsFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tableContactsFocusGained
+        try {
+            refreshContactTable();
+        } catch (SQLException ex) {
+            Logger.getLogger(PengelolaanKontakFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_tableContactsFocusGained
 
     /**
      * @param args the command line arguments
@@ -71,11 +233,145 @@ public class PengelolaanKontakFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PengelolaanKontakFrame().setVisible(true);
+                try {
+                    new PengelolaanKontakFrame().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(PengelolaanKontakFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> comboCategory;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tableContacts;
+    private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtPhone;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
+private void addContact() {
+        String name = txtName.getText();
+        String phone = txtPhone.getText();
+        String category = (String) comboCategory.getSelectedItem();
+
+        if (name.isEmpty() || phone.isEmpty() || category.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Isi semua data kontak!");
+            return;
+        }
+
+        if (!phone.matches("\\d+")) {
+            JOptionPane.showMessageDialog(null, "Nomor telepon hanya boleh berisi angka!");
+            return;
+        }
+
+        try {
+            DatabaseHelper.addContact(name, phone, category);
+            refreshContactTable();
+            JOptionPane.showMessageDialog(null, "Kontak berhasil ditambahkan!");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat menambahkan kontak.");
+            ex.printStackTrace();
+        }
+    }
+
+    private void refreshContactTable() throws SQLException {
+        List<Contact> contacts = DatabaseHelper.getContacts();
+        DefaultTableModel model = (DefaultTableModel) tableContacts.getModel();
+        model.setRowCount(0);
+
+        for (Contact contact : contacts) {
+            model.addRow(new Object[]{contact.getId(), contact.getName(), contact.getPhone(), contact.getCategory()});
+        }
+    }
+
+    private void searchContact() {
+        String keyword = txtSearch.getText();
+
+        if (keyword.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Masukkan nama atau nomor telepon untuk pencarian!");
+            return;
+        }
+
+        try {
+            List<Contact> results = DatabaseHelper.searchContact(keyword);
+            DefaultTableModel model = (DefaultTableModel) tableContacts.getModel();
+            model.setRowCount(0);
+
+            for (Contact contact : results) {
+                model.addRow(new Object[]{contact.getId(), contact.getName(), contact.getPhone(), contact.getCategory()});
+            }
+
+            if (results.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Kontak tidak ditemukan!");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat mencari kontak.");
+            ex.printStackTrace();
+        }
+    }
+
+    private void editContact() {
+        int selectedRow = tableContacts.getSelectedRow();
+
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(null, "Pilih kontak yang ingin diedit!");
+            return;
+        }
+
+        int id = (int) tableContacts.getValueAt(selectedRow, 0);
+        String name = txtName.getText();
+        String phone = txtPhone.getText();
+        String category = (String) comboCategory.getSelectedItem();
+
+        if (name.isEmpty() || phone.isEmpty() || category.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Isi semua data kontak!");
+            return;
+        }
+
+        if (!phone.matches("\\d+")) {
+            JOptionPane.showMessageDialog(null, "Nomor telepon hanya boleh berisi angka!");
+            return;
+        }
+
+        try {
+            DatabaseHelper.updateContact(id, name, phone, category);
+            refreshContactTable();
+            JOptionPane.showMessageDialog(null, "Kontak berhasil diperbarui!");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat memperbarui kontak.");
+            ex.printStackTrace();
+        }
+    }
+
+    private void deleteContact() {
+        int selectedRow = tableContacts.getSelectedRow();
+
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(null, "Pilih kontak yang ingin dihapus!");
+            return;
+        }
+
+        int id = (int) tableContacts.getValueAt(selectedRow, 0);
+        int confirm = JOptionPane.showConfirmDialog(null, "Apakah Anda yakin ingin menghapus kontak ini?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            try {
+                DatabaseHelper.deleteContact(id);
+                refreshContactTable();
+                JOptionPane.showMessageDialog(null, "Kontak berhasil dihapus!");
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat menghapus kontak.");
+            }
+        }
+    }
 }

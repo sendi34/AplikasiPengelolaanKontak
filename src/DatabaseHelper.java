@@ -1,4 +1,3 @@
-
 import java.util.List;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -19,11 +18,12 @@ import javax.swing.JOptionPane;
  * @author sendi
  */
 public class DatabaseHelper {
-   // Metode untuk koneksi ke database SQLite
+    
+    // Metode untuk koneksi ke database SQLite
     public static Connection koneksidb() {
         try {
             Class.forName("org.sqlite.JDBC");
-            Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\USER\\contacts.db"); // Perbaiki URL koneksi
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:E:\\NETBEANS PROJECT\\AplikasiPengelolaanKontak\\contacts.db"); // Perbaiki URL koneksi
             //JOptionPane.showMessageDialog(null, "Terhubung");
             return conn;
         } catch (Exception e) {

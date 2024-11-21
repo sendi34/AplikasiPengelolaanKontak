@@ -51,7 +51,7 @@ public class PengelolaanKontakFrame extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new java.awt.GridLayout());
+        getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
         jPanel1.setBackground(new java.awt.Color(255, 153, 0));
 
@@ -68,12 +68,12 @@ public class PengelolaanKontakFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Name", "Phone"
+                "Id", "Name", "Phone", "Category"
             }
         ));
-        tableContacts.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                tableContactsFocusGained(evt);
+        tableContacts.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableContactsMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tableContacts);
@@ -140,8 +140,8 @@ public class PengelolaanKontakFrame extends javax.swing.JFrame {
                             .addComponent(jButton2)
                             .addGap(30, 30, 30)
                             .addComponent(jButton3)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(232, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(211, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,13 +195,13 @@ public class PengelolaanKontakFrame extends javax.swing.JFrame {
         deleteContact();
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void tableContactsFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tableContactsFocusGained
-        try {
-            refreshContactTable();
-        } catch (SQLException ex) {
-            Logger.getLogger(PengelolaanKontakFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_tableContactsFocusGained
+    private void tableContactsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableContactsMouseClicked
+        int row = tableContacts.getSelectedRow();
+        
+        txtName.setText(tableContacts.getValueAt(row, 1).toString());
+        txtPhone.setText(tableContacts.getValueAt(row, 2).toString());
+        comboCategory.setSelectedItem(tableContacts.getValueAt(row, 3).toString());
+    }//GEN-LAST:event_tableContactsMouseClicked
 
     /**
      * @param args the command line arguments
